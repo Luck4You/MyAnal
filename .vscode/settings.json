@@ -1,0 +1,20 @@
+{
+    "remote.localPortHost": "localhost",
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "217.28.223.127",
+            "port": 17160,
+            "driver": "MySQL",
+            "database": "db_4868b",
+            "username": "user_1c974",
+            "password": "9Gp+d8$F?wM5x",
+            "name": "AnalData",
+            "group": "Anal"
+        }
+    ]
+}
