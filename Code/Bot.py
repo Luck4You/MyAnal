@@ -1,5 +1,5 @@
 import telebot
-
+from ddl.bot_text import *
 
 
 bot = telebot.TeleBot('7088145772:AAH-xwQGCWjHttMfA9hdNC9cFk29rkKymAs')
