@@ -1,18 +1,19 @@
-from ddl.bot_text import __help
-from aiogram import Bot, Dispatcher, executor, types
+import asyncio
+import logging
+from aiogram import Bot, Dispatcher, types
+from aiogram.filters.command import Command
+import ddl
 
-API_TOKEN = '5602787567:AAGYv7NrSjwyW7qPs_yvu70C060zrcfZDbQ'
+logging.basicConfig(level=logging.INFO)
+bot = Bot(token="7088145772:AAH-xwQGCWjHttMfA9hdNC9cFk29rkKymAs")
+dp = Dispatcher()
 
-bot = Bot(token=API_TOKEN)
-dp = Dispatcher(bot)
+@dp.message(Command("start"))
+async def cmd_start(message: types.Message):
+    await message.answer(ddl.bot_text.__help)
 
-@dp.message_handler(commands=['start'])
-async def send_welcome(message: types.Message):
-   await message.reply("Привет!\nЯ Эхо-бот от Skillbox!\nОтправь мне любое сообщение, а я тебе обязательно отвечу.")
- 
-@dp.message_handler()
-async def echo(message: types.Message):
-   await message.answer(message.text)
- 
-if __name__ == '__main__':
-   executor.start_polling(dp, skip_updates=True)
+async def main():
+    await dp.start_polling(bot)
+
+if __name__ == "__main__":
+    asyncio.run(main())
