@@ -1,14 +1,18 @@
-import telebot
-from ddl.bot_text import *
+from ddl.bot_text import __help
+from aiogram import Bot, Dispatcher, executor, types
 
+API_TOKEN = '5602787567:AAGYv7NrSjwyW7qPs_yvu70C060zrcfZDbQ'
 
-bot = telebot.TeleBot('7088145772:AAH-xwQGCWjHttMfA9hdNC9cFk29rkKymAs')
-@bot.message_handler(content_types=['text'])
-def get_text_messages(message):
-    if message.text == "Привет":
-        bot.send_message(message.from_user.id, "Привет, чем я могу тебе помочь?")
-    elif message.text == "/help":
-        bot.send_message(message.from_user.id, "Напиши привет")
-    else:
-        bot.send_message(message.from_user.id, "Я тебя не понимаю. Напиши /help.")
-bot.polling(none_stop=True, interval=0)
+bot = Bot(token=API_TOKEN)
+dp = Dispatcher(bot)
+
+@dp.message_handler(commands=['start'])
+async def send_welcome(message: types.Message):
+   await message.reply("Привет!\nЯ Эхо-бот от Skillbox!\nОтправь мне любое сообщение, а я тебе обязательно отвечу.")
+ 
+@dp.message_handler()
+async def echo(message: types.Message):
+   await message.answer(message.text)
+ 
+if __name__ == '__main__':
+   executor.start_polling(dp, skip_updates=True)
