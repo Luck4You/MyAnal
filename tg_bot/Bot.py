@@ -1,4 +1,5 @@
 from src.ddl import bot_text
+from src import json_extract as je
 import telebot 
 
 
@@ -11,13 +12,11 @@ def start(message):
         bot.send_message(message.chat.id, bot_text.__help)  
         bot.register_next_step_handler(message, foo)
         
-    if  message.text.lower() == "/name":
-        bot.send_message(message.chat.id, f"Твоё имя: {name}") 
   
 def foo(message):
-    global name
-    name = message.text.lower()
-    bot.send_message(message.chat.id, "Спасибо, я запомню")
+    dict_with = je.send_request_to_dict(message.text)
+    for obj in dict_with:
+        bot.send_message(message.chat.id, f"Покупка: {obj}") 
     
 bot.polling(none_stop=True)
 
